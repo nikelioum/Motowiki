@@ -19,5 +19,7 @@ class MotoBrand extends Model
         'meta_description',
         'meta_image',
         'status',
+        'sort_order',
+        'is_popular',
     ];
 }

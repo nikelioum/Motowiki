@@ -12,7 +12,7 @@ class MotoBrandController extends Controller
     // Fetch categories
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::orderBy('sort_order', 'desc')->where('status', true)->get();
 
         return Inertia::render('Brands', [
             'brands' => $brands,

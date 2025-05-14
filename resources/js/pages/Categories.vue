@@ -14,7 +14,7 @@ defineOptions({
 });
 </script>
 
-<style>
+<style scoped>
 .scrollbar-thick-black::-webkit-scrollbar {
     height: 10px;
 }
@@ -38,6 +38,12 @@ defineOptions({
     <Head>
         <title>Your page title</title>
         <meta name="description" content="Your page description" />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://example.com/my-page" />
+        <meta property="og:title" content="My Awesome Page" />
+        <meta property="og:description" content="This is the description of my awesome page." />
+        <meta property="og:image" content="https://example.com/images/social-image.jpg" />
     </Head>
 
     <div class="py-20">

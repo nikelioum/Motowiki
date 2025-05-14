@@ -115,7 +115,16 @@ watch(filteredVendors, (newFilteredVendors) => {
 <template>
     <Head>
         <title>Αντιπροσωπίες Μοτοσυκλέτας</title>
+        <meta name="description" content="Στείλτε μας το μήνυμά σας μέσω της φόρμας επικοινωνίας.">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://example.com/my-page" />
+        <meta property="og:title" content="My Awesome Page" />
+        <meta property="og:description" content="This is the description of my awesome page." />
+        <meta property="og:image" content="https://example.com/images/social-image.jpg" />
     </Head>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 
     <div class="mx-auto py-20">
         <!-- Breadcrumb -->

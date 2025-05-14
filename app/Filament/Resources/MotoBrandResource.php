@@ -48,6 +48,13 @@ class MotoBrandResource extends Resource
                 Forms\Components\Toggle::make('status')
                     ->default(true)
                     ->required(),
+                Forms\Components\TextInput::make('sort_order')
+                    ->required()
+                    ->integer()
+                    ->default(0),
+                Forms\Components\Toggle::make('is_popular')
+                    ->default(false)
+                    ->required(),
             ]);
     }
 

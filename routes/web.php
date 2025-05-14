@@ -11,8 +11,8 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 
 
-//Homepage
-Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
+//homepage
+Route::get('/', [PagesController::class, 'homepage'])->name('home');
 
 //Categories page
 Route::get('/categories', [MotoCategoryController::class, 'index'])->name('categories');
@@ -44,17 +44,10 @@ Route::post('/newsletter', [NewsletterController::class, 'store']);
 //Unsubscribe to Newsletter
 Route::get('/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
-
-//Route::get('/category/{slug}', function ($slug) {
-//    $brand = MotoCategory::where('slug', $slug)->get('id')->first()->id;
-//    $bikes = Bike::with('brand', 'category')->where('category_id', $brand)->get();
-//
-//    return Inertia::render('Bikes', [
-//        'brand' => $brand,
-//        'bikes' => $bikes,
-//    ]);
-//})->name('brands.bikes');
-
+//Define 404 for not existing routes
+Route::fallback(function () {
+    return Inertia::render('Notfound');
+});
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

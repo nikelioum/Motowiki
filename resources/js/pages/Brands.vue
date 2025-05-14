@@ -19,6 +19,12 @@ defineOptions({
     <Head>
         <title>Your page title</title>
         <meta name="description" content="Your page description">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://example.com/my-page" />
+        <meta property="og:title" content="My Awesome Page" />
+        <meta property="og:description" content="This is the description of my awesome page." />
+        <meta property="og:image" content="https://example.com/images/social-image.jpg" />
     </Head>
 
     <div class="py-20">
@@ -44,7 +50,7 @@ defineOptions({
             <h6 class="mb-4 text-xl font-semibold">Δημοφιλέστερες Κατηγορίες</h6>
             <div class="flex space-x-4 overflow-x-auto pb-4 scrollbar-thick-black">
                 <div
-                    v-for="brand in props.brands.slice(0, 10)"
+                    v-for="brand in props.brands.filter((c) => c.is_popular).slice(0, 10)"
                     :key="'popular-' + brand.id"
                     class="min-w-[200px] flex-shrink-0 rounded-lg border border-gray-300 bg-white px-4 py-2 text-center shadow-lg hover:bg-gray-100"
                 >

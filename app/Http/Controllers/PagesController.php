@@ -11,14 +11,15 @@ use App\Models\MotoBrand as Brand;
 class PagesController extends Controller
 {
 
-    //Homepage
+    //homepage
     public function homepage()
     {
 
-        $popularBrands = Brand::take(4)->get();
-
+        $popularBrands = Brand::orderBy('sort_order', 'desc')->where('status', true)->where('is_popular', true)->take(4)->get();
+        $newBikes = Bike::orderBy('created_at', 'desc')->where('status', true)->take(8)->get();
         return Inertia::render('Homepage', [
-           'brands' => $popularBrands,
+            'brands' => $popularBrands,
+            'newBikes' => $newBikes,
         ]);
     }
 

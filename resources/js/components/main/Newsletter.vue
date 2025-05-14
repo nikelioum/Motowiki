@@ -34,7 +34,7 @@ const submit = () => {
 <template>
     <!-- Newsletter Section -->
     <section class="bg-gray-200 px-6 py-12">
-        <div class="mx-auto w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center gap-6 text-center md:text-left">
+        <div class="mx-auto max-w-[1720px] grid grid-cols-1 md:grid-cols-2 items-center gap-6 text-center md:text-left">
             <!-- Left Side -->
             <div class="flex flex-col items-center md:items-start">
                 <h2 class="text-3xl font-bold text-gray-900">Newsletter</h2>

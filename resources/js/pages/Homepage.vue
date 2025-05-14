@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import MainLayout from '@/layouts/Main.vue'
-import Intro from '@/components/Homepage/Header.vue'
-import TopBrands from '@/components/Homepage/TopBrands.vue'
-import Newsletter from '@/components/Homepage/Newsletter.vue';
+import Intro from '@/components/homepage/Header.vue'
+import TopBrands from '@/components/homepage/TopBrands.vue'
+import NewBikes from '@/components/homepage/NewBikes.vue'
 
-// Receive the brands prop from the controller
 defineProps({
     brands: Array,
+    newBikes: Array,
 })
 
 defineOptions({
@@ -17,4 +17,5 @@ defineOptions({
 <template>
     <Intro />
     <TopBrands :brands="brands" />
+    <NewBikes :newBikes="newBikes"/>
 </template>
