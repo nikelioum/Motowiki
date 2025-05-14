@@ -7,6 +7,7 @@ use App\Models\Newsletter;
 use App\Mail\NewsletterWelcomeMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class NewsletterController extends Controller
 {
@@ -35,10 +36,16 @@ class NewsletterController extends Controller
         $subscriber = Newsletter::where('unsubscribe_token', $token)->first();
 
         if (!$subscriber) {
-            return response('Invalid or expired unsubscribe link.', 404);
+            return Inertia::render('UnsubscribeResult', [
+                'success' => false,
+                'message' => 'Invalid or expired unsubscribe link.'
+            ]);
         }
 
         $subscriber->delete(); // or update a `subscribed` column to false
-        return response('You have been unsubscribed.');
+        return Inertia::render('UnsubscribeResult', [
+            'success' => true,
+            'message' => 'You have been successfully unsubscribed.'
+        ]);
     }
 }
