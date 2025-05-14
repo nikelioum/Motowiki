@@ -9,6 +9,7 @@ use App\Http\Controllers\MotoCategoryController;
 use App\Http\Controllers\MotoBrandController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SitemapController;
 
 
 //homepage
@@ -49,6 +50,12 @@ Route::fallback(function () {
     return Inertia::render('Notfound');
 });
 
+//Sitemap generate
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+
+
+
+//Admin dashboard for user
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
