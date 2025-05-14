@@ -1,0 +1,24 @@
+<script setup lang="ts">
+defineProps({
+    brand: Object,
+    bikes: Array
+});
+import { Link } from '@inertiajs/vue3';
+</script>
+
+<template>
+    <div class="p-6 max-w-4xl mx-auto">
+        <Link :href="route('home')" class="mb-4 inline-block text-blue-600 hover:underline">← Back to Categories</Link>
+
+        <div v-if="bikes.length" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div v-for="bike in bikes" :key="bike.id" class="border rounded p-4 shadow">
+                <img :src="`/storage/${bike.image}`" alt="Bike image" class="w-full h-48 object-cover mb-3 rounded">
+                <h2 class="text-lg font-semibold">{{ bike.name }}</h2>
+                <h4>{{ bike.brand.name }}</h4>
+                <h4>{{ bike.category.title }}</h4>
+            </div>
+        </div>
+
+        <p v-else class="text-gray-600">No bikes found for this brand.</p>
+    </div>
+</template>
