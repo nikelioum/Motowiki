@@ -5,6 +5,7 @@ import Navbar from '@/components/header/Navbar.vue'
 import Footer from '@/components/footer/Footer.vue'
 import Newsletter from '@/components/main/Newsletter.vue'
 import Consent from '@/components/main/Consents.vue'
+import ReviewPrompt from '@/components/main/ReviewPrompt.vue'
 
 const cookieAccepted = ref(false)
 
@@ -39,6 +40,7 @@ const rejectCookies = () => {
             <slot />
             <!-- Consent -->
             <Consent v-if="!cookieAccepted"@accepted="acceptCookies"@rejected="rejectCookies"/>
+            <ReviewPrompt />
         </main>
     </div>
     <!--Newsletter-->
