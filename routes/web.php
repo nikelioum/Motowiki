@@ -10,6 +10,7 @@ use App\Http\Controllers\MotoBrandController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\FeedbackController;
 
 
 //homepage
@@ -52,6 +53,9 @@ Route::fallback(function () {
 
 //Sitemap generate
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+
+//Feedback submit
+Route::post('/feedback', [FeedbackController::class, 'store']);
 
 
 
