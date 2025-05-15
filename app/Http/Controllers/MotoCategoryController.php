@@ -25,12 +25,20 @@ class MotoCategoryController extends Controller
         ]);
     }
 
-    //Category Page
-    public function singleCategory($slug){
-        $categoryId = Category::where('slug', $slug)->get('id')->first()->id;
+    public function singleCategory($slug)
+    {
         $category = Category::where('slug', $slug)->first();
-        $bikes = Bike::with('brand', 'category')->where('category_id', $categoryId)->get();
-        // Get only the brands that are used in the bikes list
+
+        if (!$category) {
+            return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+        }
+
+        $categoryId = $category->id;
+
+        $bikes = Bike::with('brand', 'category')
+            ->where('category_id', $categoryId)
+            ->get();
+
         $brands = Brand::whereIn('id', $bikes->pluck('brand_id')->filter())->get();
 
         return Inertia::render('CategoryBikes', [
@@ -44,6 +52,7 @@ class MotoCategoryController extends Controller
             ],
         ]);
     }
+
 
 
 

@@ -41,7 +41,13 @@ class PagesController extends Controller
     public function singleBike($slug)
     {
 
-        $bike = Bike::where('slug', $slug)->with('category', 'brand', 'specValues.spec.specCategory')->first();
+        $bike = Bike::where('slug', $slug)
+            ->with('category', 'brand', 'specValues.spec.specCategory')
+            ->first();
+
+        if (!$bike) {
+            return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+        }
 
         return Inertia::render('Bike', [
             'bike' => $bike,

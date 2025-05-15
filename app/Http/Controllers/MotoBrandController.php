@@ -27,11 +27,16 @@ class MotoBrandController extends Controller
     // Single Brand page
     public function singleBrand($slug)
     {
-        $brandId = Brand::where('slug', $slug)->get('id')->first()->id;
         $brand = Brand::where('slug', $slug)->first();
+
+        if (!$brand) {
+            // Show your Inertia 404 component
+            return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+        }
+
+        $brandId = $brand->id;
+
         $bikes = Bike::where('brand_id', $brandId)->with('category', 'brand')->get();
-
-
 
         return Inertia::render('BrandBikes', [
             'bikes' => $bikes,
