@@ -63,16 +63,16 @@ defineOptions({
 
 
         <!-- Brands Grid -->
-        <div class="grid grid-cols-1 gap-6 pt-12 pb-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div class="grid grid-cols-3 gap-6 pt-12 pb-12 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6">
             <div v-for="brand in props.brands" :key="brand.id">
                 <!-- Card -->
                 <div class="overflow-hidden rounded-lg bg-white shadow-lg">
                     <Link :href="`/brand/${brand.slug}`" class="block p-4">
-                        <img :src="`/storage/${brand.image}`" :alt="brand.title" class=" h-48 w-full object-contain bg-white" />
+                        <img :src="`/storage/${brand.image}`" :alt="brand.title" class=" h-20 w-full object-contain bg-white" />
 
-                        <div class="p-4">
-                            <h3 class="mt-2 mb-2 text-center text-xl font-semibold">{{ brand.name }}</h3>
-                        </div>
+<!--                        <div class="p-4">-->
+<!--                            <h3 class="mt-2 mb-2 text-center text-xl font-semibold">{{ brand.name }}</h3>-->
+<!--                        </div>-->
                     </Link>
                 </div>
             </div>
