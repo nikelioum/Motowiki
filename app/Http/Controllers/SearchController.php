@@ -35,8 +35,8 @@ class SearchController extends Controller
 
         // Search bikes by name (case-insensitive LIKE)
         $bikes = Bike::where('name', 'LIKE', "%{$query}%")
-            ->select('id', 'name', 'slug', 'image')
             ->limit(10)
+            ->with('category', 'brand')
             ->get();
 
         return response()->json(['bikes' => $bikes]);

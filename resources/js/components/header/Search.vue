@@ -142,7 +142,7 @@ const goTo = (url: string) => {
 
                     <!-- Live Search Results -->
                     <!-- Search Results Grid -->
-                    <div v-if="searchResults.length > 0" class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+                    <div v-if="searchResults.length > 0" class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-6">
                         <div
                             v-for="bike in searchResults"
                             :key="bike.id"
@@ -155,6 +155,8 @@ const goTo = (url: string) => {
                                     class="w-full h-32 object-contain mx-auto mb-3"
                                 />
                                 <div class="text-sm font-medium text-gray-800">{{ bike.name }}</div>
+                                {{bike.category.title}}
+                                {{bike.brand.name}}
                             </Link>
                         </div>
                     </div>
@@ -164,7 +166,7 @@ const goTo = (url: string) => {
                         Δεν βρέθηκαν αποτελέσματα.
                     </div>
 
-
+                    <div class="mt-6 max-h-[300px] overflow-y-auto space-y-6">
                     <!-- Recommendations Grid -->
                     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Popular Brands -->
@@ -218,10 +220,11 @@ const goTo = (url: string) => {
                         </div>
                     </div>
 
+
                     <!-- Popular Bikes Section (4 columns) -->
                     <div class="mt-10">
                         <p class="text-sm text-gray-500 mb-4">Δημοφιλή Μοντέλα Μοτοσυκλετών:</p>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
                             <div
                                 v-for="bike in popularBikes"
                                 :key="bike.id"
@@ -237,6 +240,7 @@ const goTo = (url: string) => {
                                 </Link>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

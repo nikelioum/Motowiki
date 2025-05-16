@@ -6,6 +6,7 @@ import Footer from '@/components/footer/Footer.vue'
 import Newsletter from '@/components/main/Newsletter.vue'
 import Consent from '@/components/main/Consents.vue'
 import ReviewPrompt from '@/components/main/ReviewPrompt.vue'
+import GoTop from '@/components/main/GoTop.vue'
 
 const cookieAccepted = ref(false)
 
@@ -47,4 +48,5 @@ const rejectCookies = () => {
     <Newsletter />
     <!--Footer-->
     <Footer />
+    <GoTop />
 </template>
