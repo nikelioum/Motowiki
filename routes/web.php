@@ -60,6 +60,12 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 //Feedback submit
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
+//Terms page
+Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
+
+//Privacy page
+Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
+
 
 
 //Admin dashboard for user

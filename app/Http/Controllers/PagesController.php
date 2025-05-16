@@ -103,4 +103,30 @@ class PagesController extends Controller
     }
 
 
+    // Terms page
+    public function terms()
+    {
+
+        return Inertia::render('Terms', [
+            'breadcrumb' => [
+                ['label' => 'Αρχική', 'url' => '/'],
+                ['label' => 'Terms', 'url' => '/terms'],
+            ],
+        ]);
+    }
+
+
+    // Privacy page
+    public function privacy()
+    {
+
+        return Inertia::render('Privacy', [
+            'breadcrumb' => [
+                ['label' => 'Αρχική', 'url' => '/'],
+                ['label' => 'Privacy', 'url' => '/privacy'],
+            ],
+        ]);
+    }
+
+
 }
