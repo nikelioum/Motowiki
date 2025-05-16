@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { Link, router } from '@inertiajs/vue3'
 
 const searchQuery = ref('')
@@ -10,6 +10,21 @@ const popularBrands = ref([])
 const popularCategories = ref([])
 const popularBikes = ref([])
 
+// Live search results for bikes based on user input
+const searchResults = ref([])
+
+// Loading state for live search
+const isSearching = ref(false)
+
+// Debounce helper function
+function debounce(fn: Function, delay = 300) {
+    let timeout: ReturnType<typeof setTimeout>
+    return (...args: any[]) => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => fn(...args), delay)
+    }
+}
+
 const openModal = () => {
     showModal.value = true
     fetchRecommendations()
@@ -18,6 +33,7 @@ const openModal = () => {
 const closeModal = () => {
     showModal.value = false
     searchQuery.value = ''
+    searchResults.value = []
 }
 
 const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,6 +52,38 @@ const fetchRecommendations = async () => {
         console.error(error)
     }
 }
+
+// Live search bikes API call
+const fetchBikeSearchResults = async (query: string) => {
+    if (query.length < 4) {
+        searchResults.value = []
+        return
+    }
+    isSearching.value = true
+    try {
+        const res = await fetch(`/bikes/search?q=${encodeURIComponent(query)}`)
+        if (!res.ok) throw new Error('Failed to fetch bikes')
+        const data = await res.json()
+        searchResults.value = data.bikes || []
+    } catch (error) {
+        console.error(error)
+        searchResults.value = []
+    } finally {
+        isSearching.value = false
+    }
+}
+
+// Debounced version of live search
+const debouncedSearch = debounce(fetchBikeSearchResults, 300)
+
+// Watch for changes in searchQuery to trigger live search
+watch(searchQuery, (newQuery) => {
+    if (newQuery.length >= 4) {
+        debouncedSearch(newQuery)
+    } else {
+        searchResults.value = []
+    }
+})
 
 onMounted(() => {
     window.addEventListener('keydown', handleKeyDown)
@@ -89,8 +137,33 @@ const goTo = (url: string) => {
                         v-model="searchQuery"
                         class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                         placeholder="Αναζήτηση προϊόντων..."
-                        @keydown.enter.prevent="() => { if (searchQuery) goTo(`/search?q=${encodeURIComponent(searchQuery)}`) }"
+                        @keydown.enter.prevent
                     />
+
+                    <!-- Live Search Results -->
+                    <!-- Search Results Grid -->
+                    <div v-if="searchResults.length > 0" class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+                        <div
+                            v-for="bike in searchResults"
+                            :key="bike.id"
+                            class="p-4 rounded-lg border border-gray-200 shadow hover:shadow-md transition cursor-pointer"
+                        >
+                            <Link :href="`/bike/${bike.slug}`" @click="() => closeModal()" class="block text-center">
+                                <img
+                                    :src="`/storage/${bike.image}`"
+                                    :alt="bike.name"
+                                    class="w-full h-32 object-contain mx-auto mb-3"
+                                />
+                                <div class="text-sm font-medium text-gray-800">{{ bike.name }}</div>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <!-- No Results Message -->
+                    <div v-else-if="searchQuery.length >= 4" class="mt-6 text-center text-gray-500 font-medium">
+                        Δεν βρέθηκαν αποτελέσματα.
+                    </div>
+
 
                     <!-- Recommendations Grid -->
                     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -145,10 +218,10 @@ const goTo = (url: string) => {
                         </div>
                     </div>
 
-                    <!-- ✅ Popular Bikes Section (4 columns) -->
+                    <!-- Popular Bikes Section (4 columns) -->
                     <div class="mt-10">
                         <p class="text-sm text-gray-500 mb-4">Δημοφιλή Μοντέλα Μοτοσυκλετών:</p>
-                        <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div
                                 v-for="bike in popularBikes"
                                 :key="bike.id"
@@ -165,7 +238,6 @@ const goTo = (url: string) => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </Teleport>

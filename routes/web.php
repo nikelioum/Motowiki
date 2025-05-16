@@ -70,6 +70,9 @@ Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
 //Search
 Route::get('/search/recommendations', [SearchController::class, 'recommendations']);
 
+//Search bikes
+Route::get('/bikes/search', [SearchController::class, 'searchBikes']);
+
 
 //Admin dashboard for user
 Route::get('dashboard', function () {

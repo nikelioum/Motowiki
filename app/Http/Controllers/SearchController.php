@@ -21,4 +21,24 @@ class SearchController extends Controller
             'popularBikes' => $popularBikes,
         ]);
     }
+
+
+    //Search bikes
+    public function searchBikes(Request $request)
+    {
+        $query = $request->query('q', '');
+
+        // Return empty if less than 4 chars
+        if (strlen($query) < 4) {
+            return response()->json(['bikes' => []]);
+        }
+
+        // Search bikes by name (case-insensitive LIKE)
+        $bikes = Bike::where('name', 'LIKE', "%{$query}%")
+            ->select('id', 'name', 'slug', 'image')
+            ->limit(10)
+            ->get();
+
+        return response()->json(['bikes' => $bikes]);
+    }
 }
