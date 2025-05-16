@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { usePage, Link } from '@inertiajs/vue3'
 import Topbar from '@/components/header/Topbar.vue'
+import Search from '@/components/header/Search.vue'
 
 const isOpen = ref(false)
 const accountDropdownOpen = ref(false)
@@ -69,13 +70,7 @@ onUnmounted(() => {
 
             <!-- Right: Search & Account -->
             <div class="hidden md:flex items-center space-x-2 z-10">
-                <input
-                    type="search"
-                    v-model="searchQuery"
-                    placeholder="Αναζήτηση..."
-                    class="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-black"
-                    @keydown.enter.prevent="() => { if(searchQuery) window.location.href = `/search?q=${encodeURIComponent(searchQuery)}` }"
-                />
+                <Search />
 
                 <!-- Account Dropdown -->
                 <div class="relative" @mouseenter="openDropdown" @mouseleave="closeDropdown">
@@ -161,13 +156,14 @@ onUnmounted(() => {
 
             <!-- Mobile Search -->
             <div class="pt-2">
-                <input
-                    type="search"
-                    v-model="searchQuery"
-                    placeholder="Αναζήτηση..."
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                    @keydown.enter.prevent="() => { if(searchQuery) window.location.href = `/search?q=${encodeURIComponent(searchQuery)}` }"
-                />
+<!--                <input-->
+<!--                    type="search"-->
+<!--                    v-model="searchQuery"-->
+<!--                    placeholder="Αναζήτηση..."-->
+<!--                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"-->
+<!--                    @keydown.enter.prevent="() => { if(searchQuery) window.location.href = `/search?q=${encodeURIComponent(searchQuery)}` }"-->
+<!--                />-->
+                <Search />
             </div>
 
             <!-- Auth Links -->

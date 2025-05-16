@@ -11,6 +11,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SearchController;
 
 
 //homepage
@@ -66,6 +67,8 @@ Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
 //Privacy page
 Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
 
+//Search
+Route::get('/search/recommendations', [SearchController::class, 'recommendations']);
 
 
 //Admin dashboard for user
