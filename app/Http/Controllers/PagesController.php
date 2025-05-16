@@ -88,4 +88,19 @@ class PagesController extends Controller
             'vendors' => $vendors
         ]);
     }
+
+
+    // About page
+    public function about()
+    {
+
+        return Inertia::render('About', [
+            'breadcrumb' => [
+                ['label' => 'Αρχική', 'url' => '/'],
+                ['label' => 'Σχετικά', 'url' => '/about'],
+            ],
+        ]);
+    }
+
+
 }

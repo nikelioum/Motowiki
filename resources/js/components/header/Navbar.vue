@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { usePage, Link } from '@inertiajs/vue3'
 import Topbar from '@/components/header/Topbar.vue'
 
 const isOpen = ref(false)
 const scrollPosition = ref(0)
+
 const toggleMenu = () => {
     isOpen.value = !isOpen.value
 }
@@ -12,6 +13,12 @@ const toggleMenu = () => {
 const handleScroll = () => {
     scrollPosition.value = window.scrollY
 }
+
+// Close menu on navigation
+const page = usePage()
+watch(() => page.url, () => {
+    isOpen.value = false
+})
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll)
@@ -21,6 +28,7 @@ onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll)
 })
 </script>
+
 
 <template>
     <Topbar />

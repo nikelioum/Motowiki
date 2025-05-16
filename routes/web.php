@@ -34,6 +34,9 @@ Route::get('/bike/{slug}', [PagesController::class, 'singleBike'])->name('single
 //Vendors page
 Route::get('/vendors', [PagesController::class, 'vendors'])->name('vendors');
 
+//About page
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+
 //Contact page
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
