@@ -15,7 +15,7 @@ class PagesController extends Controller
     public function homepage()
     {
 
-        $popularBrands = Brand::orderBy('sort_order', 'desc')->where('status', true)->where('is_popular', true)->take(4)->get();
+        $popularBrands = Brand::orderBy('sort_order', 'desc')->where('status', true)->where('is_popular', true)->take(6)->get();
         $newBikes = Bike::orderBy('created_at', 'desc')->where('status', true)->take(8)->get();
         return Inertia::render('Homepage', [
             'brands' => $popularBrands,

@@ -29,14 +29,21 @@ class SearchController extends Controller
         $query = $request->query('q', '');
 
         // Return empty if less than 4 chars
-        if (strlen($query) < 4) {
+        if (strlen($query) < 3) {
             return response()->json(['bikes' => []]);
         }
 
         // Search bikes by name (case-insensitive LIKE)
-        $bikes = Bike::where('name', 'LIKE', "%{$query}%")
+        $bikes = Bike::with('category', 'brand')
+            ->join('moto_brands', 'bikes.brand_id', '=', 'moto_brands.id')
+            ->where('bikes.status', true)
+            ->where(function ($q) use ($query) {
+                $q->where('bikes.name', 'LIKE', "%{$query}%")
+                    ->orWhere('moto_brands.name', 'LIKE', "%{$query}%")
+                    ->orWhereRaw("CONCAT(moto_brands.name, ' ', bikes.name) LIKE ?", ["%{$query}%"]);
+            })
+            ->select('bikes.*') // Only select bike fields to avoid column conflicts
             ->limit(10)
-            ->with('category', 'brand')
             ->get();
 
         return response()->json(['bikes' => $bikes]);

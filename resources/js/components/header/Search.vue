@@ -55,7 +55,7 @@ const fetchRecommendations = async () => {
 
 // Live search bikes API call
 const fetchBikeSearchResults = async (query: string) => {
-    if (query.length < 4) {
+    if (query.length < 3) {
         searchResults.value = []
         return
     }
@@ -78,7 +78,7 @@ const debouncedSearch = debounce(fetchBikeSearchResults, 300)
 
 // Watch for changes in searchQuery to trigger live search
 watch(searchQuery, (newQuery) => {
-    if (newQuery.length >= 4) {
+    if (newQuery.length >= 3) {
         debouncedSearch(newQuery)
     } else {
         searchResults.value = []
@@ -142,7 +142,7 @@ const goTo = (url: string) => {
 
                     <!-- Live Search Results -->
                     <!-- Search Results Grid -->
-                    <div v-if="searchResults.length > 0" class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-6">
+                    <div v-if="searchResults.length > 0" class="grid grid-cols-3 md:grid-cols-3 gap-6 mt-6">
                         <div
                             v-for="bike in searchResults"
                             :key="bike.id"
@@ -162,7 +162,7 @@ const goTo = (url: string) => {
                     </div>
 
                     <!-- No Results Message -->
-                    <div v-else-if="searchQuery.length >= 4" class="mt-6 text-center text-gray-500 font-medium">
+                    <div v-else-if="searchQuery.length >= 3" class="mt-6 text-center text-gray-500 font-medium">
                         Δεν βρέθηκαν αποτελέσματα.
                     </div>
 

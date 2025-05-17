@@ -15,7 +15,7 @@ const props = defineProps({
         <h1 class="text-3xl font-bold text-center mb-10">Δημοφιλής Μάρκες</h1>
 
         <!-- Brands Grid -->
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-12 pb-12">
+        <div class="grid grid-cols-3 gap-6 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-12 pb-12">
             <!-- Loop through the brands and display each one -->
             <div v-for="brand in props.brands" :key="brand.id">
                 <!-- Card -->
@@ -23,12 +23,12 @@ const props = defineProps({
                     <!-- Link to brand page -->
                     <Link :href="`/brand/${brand.slug}`" class="block p-4">
                         <!-- Brand image -->
-                        <img :src="`/storage/${brand.image}`" :alt="brand.name" class="h-48 w-full object-contain bg-white" />
+                        <img :src="`/storage/${brand.image}`" :alt="brand.name" class="h-20 w-full object-contain bg-white" />
 
-                        <div class="p-4">
-                            <!-- Brand name -->
-                            <h3 class="mt-2 mb-2 text-center text-xl font-semibold">{{ brand.name }}</h3>
-                        </div>
+<!--                        <div class="p-4">-->
+<!--                            &lt;!&ndash; Brand name &ndash;&gt;-->
+<!--                            <h3 class="mt-2 mb-2 text-center text-xl font-semibold">{{ brand.name }}</h3>-->
+<!--                        </div>-->
                     </Link>
                 </div>
             </div>
