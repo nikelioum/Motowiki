@@ -1,13 +1,29 @@
 <script lang="ts" setup>
-import { ref, defineEmits, defineExpose, computed } from 'vue';
+import { ref, defineEmits, defineExpose, computed, watch, onMounted } from 'vue';
+
+interface Brand {
+    id: number;
+    name: string;
+}
+
+interface Category {
+    id: number;
+    name: string;
+}
 
 interface Bike {
     id: number;
     name: string;
     image: string;
+    brand?: Brand;
+    category?: Category;
+    price?: number;
+    year: string;
 }
 
-const maxBikes = 4;
+const STORAGE_KEY = 'compare_bikes';
+
+const maxBikes = 3;
 const bikes = ref<Bike[]>([]);
 
 const emit = defineEmits<{
@@ -37,7 +53,6 @@ defineExpose({ addBike });
 
 const canCompare = computed(() => bikes.value.length > 1);
 
-// State: fullscreen compare mode toggle
 const isFullscreen = ref(false);
 
 function openFullscreen() {
@@ -51,9 +66,28 @@ function closeFullscreen() {
 function removeAllAndClose() {
     bikes.value = [];
     isFullscreen.value = false;
-    // You can emit events if needed here
-    // e.g. emit('compare-remove', null); or emit a custom event
 }
+
+// Load from localStorage on mount
+onMounted(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        try {
+            bikes.value = JSON.parse(saved);
+        } catch {
+            // ignore corrupt data
+        }
+    }
+});
+
+// Save to localStorage whenever bikes change
+watch(
+    bikes,
+    (newBikes) => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newBikes));
+    },
+    { deep: true }
+);
 </script>
 
 <template>
@@ -64,7 +98,7 @@ function removeAllAndClose() {
       isFullscreen ? 'top-0 bottom-0 h-screen flex-col overflow-auto' : 'h-20 items-center space-x-4'
     ]"
     >
-        <!-- If fullscreen, show close button top right -->
+        <!-- Close fullscreen button -->
         <button
             v-if="isFullscreen"
             @click="closeFullscreen"
@@ -96,6 +130,23 @@ function removeAllAndClose() {
                     :class="isFullscreen ? 'h-40 w-full object-contain mb-2' : 'h-12 w-16 object-contain'"
                 />
                 <div class="text-center font-semibold">{{ bike.name }}</div>
+
+                <!-- Show brand, category and price ONLY in fullscreen mode -->
+                <template v-if="isFullscreen">
+                    <div class="text-sm text-gray-600 mt-1">
+                        Brand: {{ bike.brand?.name || 'Άγνωστη Μάρκα' }}
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">
+                        Category: {{ bike.category?.name || 'Άγνωστη Κατηγορία' }}
+                    </div>
+                    <div class="text-sm font-bold text-black">
+                        Από {{ bike.price ? Math.floor(bike.price) + ' €' : '-' }}
+                    </div>
+                    <div class="text-sm font-bold text-black">
+                        Έτος: {{ bike.year }}
+                    </div>
+                </template>
+
                 <!-- Remove button always visible -->
                 <button
                     @click="removeBike(bike.id)"
@@ -111,7 +162,7 @@ function removeAllAndClose() {
         <button
             v-if="canCompare && !isFullscreen"
             @click="openFullscreen"
-            class="ml-auto bg-black text-white px-6 py-2  shadow transition cursor-pointer"
+            class="ml-auto bg-black text-white px-6 py-2 shadow transition cursor-pointer"
             aria-label="Compare selected bikes"
         >
             Σύγκριση ({{ bikes.length }})
@@ -126,7 +177,5 @@ function removeAllAndClose() {
         >
             Αφαίρεση όλων
         </button>
-
-
     </div>
 </template>
