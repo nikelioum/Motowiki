@@ -3,12 +3,20 @@ import MainLayout from '@/layouts/Main.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { defineProps, ref, computed } from 'vue';
 import { ArrowLeftIcon } from '@heroicons/vue/24/solid';
+import CompareBar from '@/components/main/CompareBar.vue';
+
+const compareBarRef = ref<InstanceType<typeof CompareBar> | null>(null);
+
+function compareBike(bike: any) {
+    if (!compareBarRef.value) return;
+    compareBarRef.value.addBike(bike);
+}
 
 const props = defineProps({
     brands: Array,
     bikes: Array,
     category: Object,
-    breadcrumb: Array,
+    breadcrumb: Array
 });
 
 // Filters
@@ -48,7 +56,7 @@ const groupedBikes = computed(() => {
 });
 
 defineOptions({
-    layout: MainLayout,
+    layout: MainLayout
 });
 </script>
 
@@ -115,10 +123,30 @@ defineOptions({
                     <h3 class="text-lg font-semibold mb-2">{{ year }}</h3>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         <div v-for="bike in bikes" :key="bike.id">
-                            <div class="overflow-hidden rounded-lg bg-white shadow-lg relative">
+                            <div class="overflow-hidden rounded-lg bg-white shadow-lg relative group">
+                                <!-- Compare Button (shown on hover) -->
+                                <button
+                                    @click="compareBike(bike)"
+                                    class="absolute right-2 top-1/2 -translate-y-1/2
+                                       opacity-0 group-hover:opacity-100
+                                       md:opacity-0 md:group-hover:opacity-100
+                                       opacity-100 md:opacity-0
+                                       bg-white text-gray-700 hover:bg-gray-100 p-2 rounded-full shadow-lg z-10 cursor-pointer"
+                                    title="Σύγκριση μοντέλου"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M4 6h4V4H4v2zm6 0h4V4h-4v2zM4 12h4v-2H4v2zm6 0h4v-2h-4v2zM4 18h4v-2H4v2zm6 0h4v-2h-4v2zM16 6h4V4h-4v2zm0 6h4v-2h-4v2zm0 6h4v-2h-4v2z" />
+                                    </svg>
+                                </button>
+
                                 <Link :href="`/bike/${bike.slug}`" class="block p-4">
-                                    <span class="absolute top-2 right-2 rounded bg-black px-2 py-1 text-xs font-bold text-white"> Από {{ Math.floor(bike.price) }} €</span>
-                                    <img :src="`/storage/${bike.image}`" :alt="bike.title" class="h-48 w-full object-contain bg-white" />
+                                    <span
+                                        class="absolute top-2 right-2 rounded bg-black px-2 py-1 text-xs font-bold text-white"> Από {{ Math.floor(bike.price)
+                                        }} €</span>
+                                    <img :src="`/storage/${bike.image}`" :alt="bike.title"
+                                         class="h-48 w-full object-contain bg-white" />
                                     <div class="p-4">
                                         <h3 class="mt-2 mb-2 text-center text-xl font-semibold">{{ bike.name }}</h3>
                                     </div>
@@ -132,5 +160,7 @@ defineOptions({
 
         <!-- No bikes -->
         <div v-else class="text-center text-gray-500 mt-10">Δεν βρέθηκαν αποτελέσματα.</div>
+
+        <CompareBar ref="compareBarRef" />
     </div>
 </template>
