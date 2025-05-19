@@ -74,6 +74,20 @@ Route::get('/search/recommendations', [SearchController::class, 'recommendations
 Route::get('/bikes/search', [SearchController::class, 'searchBikes']);
 
 
+//Test api
+use Illuminate\Support\Facades\Http;
+Route::get('/test-motorcycles', function () {
+    $response = Http::withHeaders([
+        'X-Api-Key' => 'bTHW9N/jfAX3/rKEo8LX1A==0JtkhctSSPu6zhnE',
+    ])->get('https://api.api-ninjas.com/v1/motorcycles', [
+        'make' => 'Triumph',
+        'year' => '2017'
+    ]);
+
+    return response()->json($response->json());
+});
+
+
 //Admin dashboard for user
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');

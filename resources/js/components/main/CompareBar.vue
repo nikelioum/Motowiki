@@ -132,7 +132,7 @@ watch(
                     Brand: {{ bike.brand?.name || 'Άγνωστη Μάρκα' }}
                 </div>
                 <div class="text-sm text-gray-600 mt-1">
-                    Category: {{ bike.category?.name || 'Άγνωστη Κατηγορία' }}
+                    Category: {{ bike.category?.title || 'Άγνωστη Κατηγορία' }}
                 </div>
                 <div class="text-sm font-bold text-black">
                     Από {{ bike.price ? Math.floor(bike.price) + ' €' : '-' }}
