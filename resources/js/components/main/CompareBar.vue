@@ -23,7 +23,7 @@ interface Bike {
 
 const STORAGE_KEY = 'compare_bikes';
 
-const maxBikes = 3;
+const maxBikes = 4;
 const bikes = ref<Bike[]>([]);
 
 const emit = defineEmits<{
@@ -94,9 +94,11 @@ watch(
     <div
         v-if="bikes.length > 0"
         :class="[
-      'fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 py-20 flex z-50 transition-all duration-300',
-      isFullscreen ? 'top-0 bottom-0 h-screen flex-col overflow-auto' : 'h-20 items-center space-x-4'
-    ]"
+          'fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 py-20 flex z-50 transition-all duration-300',
+          isFullscreen
+            ? 'top-0 bottom-0 h-screen flex-col overflow-auto'
+            : 'sm:h-20 items-center space-x-4'
+        ]"
     >
         <!-- Close fullscreen button -->
         <button
@@ -108,46 +110,37 @@ watch(
             &times;
         </button>
 
-        <!-- Bikes list -->
+        <!-- Fullscreen bikes grid -->
         <div
-            :class="[
-        'flex',
-        isFullscreen ? 'flex-row justify-around w-full flex-wrap gap-8' : 'items-center space-x-4 flex-grow overflow-x-auto'
-      ]"
+            v-if="isFullscreen"
+            class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full px-4"
             style="min-width: 0;"
         >
             <div
                 v-for="bike in bikes"
                 :key="bike.id"
-                :class="[
-          'flex flex-col items-center border rounded p-2',
-          isFullscreen ? 'w-1/4' : 'w-auto'
-        ]"
+                class="flex flex-col items-center border rounded p-2 w-full"
             >
                 <img
                     :src="`/storage/${bike.image}`"
                     :alt="bike.name"
-                    :class="isFullscreen ? 'h-40 w-full object-contain mb-2' : 'h-12 w-16 object-contain'"
+                    class="h-40 w-full object-contain mb-2"
                 />
-                <div class="text-center font-semibold">{{ bike.name }}</div>
+                <div class="text-center font-semibold truncate w-full">{{ bike.name }}</div>
 
-                <!-- Show brand, category and price ONLY in fullscreen mode -->
-                <template v-if="isFullscreen">
-                    <div class="text-sm text-gray-600 mt-1">
-                        Brand: {{ bike.brand?.name || 'Άγνωστη Μάρκα' }}
-                    </div>
-                    <div class="text-sm text-gray-600 mt-1">
-                        Category: {{ bike.category?.name || 'Άγνωστη Κατηγορία' }}
-                    </div>
-                    <div class="text-sm font-bold text-black">
-                        Από {{ bike.price ? Math.floor(bike.price) + ' €' : '-' }}
-                    </div>
-                    <div class="text-sm font-bold text-black">
-                        Έτος: {{ bike.year }}
-                    </div>
-                </template>
+                <div class="text-sm text-gray-600 mt-1">
+                    Brand: {{ bike.brand?.name || 'Άγνωστη Μάρκα' }}
+                </div>
+                <div class="text-sm text-gray-600 mt-1">
+                    Category: {{ bike.category?.name || 'Άγνωστη Κατηγορία' }}
+                </div>
+                <div class="text-sm font-bold text-black">
+                    Από {{ bike.price ? Math.floor(bike.price) + ' €' : '-' }}
+                </div>
+                <div class="text-sm font-bold text-black">
+                    Έτος: {{ bike.year }}
+                </div>
 
-                <!-- Remove button always visible -->
                 <button
                     @click="removeBike(bike.id)"
                     class="text-red-500 hover:text-red-700 mt-2 cursor-pointer"
@@ -158,24 +151,54 @@ watch(
             </div>
         </div>
 
-        <!-- Show compare button only if not fullscreen and enough bikes -->
-        <button
-            v-if="canCompare && !isFullscreen"
-            @click="openFullscreen"
-            class="ml-auto bg-black text-white px-6 py-2 shadow transition cursor-pointer"
-            aria-label="Compare selected bikes"
-        >
-            Σύγκριση ({{ bikes.length }})
-        </button>
+        <!-- Non-fullscreen: mobile bikes grid + buttons stacked -->
+        <div v-else class="flex flex-col sm:flex-row sm:items-center w-full gap-4 px-2">
 
-        <!-- Remove All & Close button -->
-        <button
-            v-if="bikes.length > 1 && canCompare && !isFullscreen"
-            @click="removeAllAndClose"
-            class="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 cursor-pointer shadow transition"
-            aria-label="Remove all bikes and close compare bar"
-        >
-            Αφαίρεση όλων
-        </button>
+            <!-- Bikes grid on mobile + tablets -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
+                <div
+                    v-for="bike in bikes"
+                    :key="bike.id"
+                    class="flex flex-col items-center border rounded p-2"
+                >
+                    <img
+                        :src="`/storage/${bike.image}`"
+                        :alt="bike.name"
+                        class="h-12 w-16 object-contain"
+                    />
+                    <div class="text-center font-semibold truncate w-full max-w-[80px]">{{ bike.name }}</div>
+                    <button
+                        @click="removeBike(bike.id)"
+                        class="text-red-500 hover:text-red-700 mt-2 cursor-pointer"
+                        aria-label="Remove bike"
+                    >
+                        &times;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Buttons stacked full-width on mobile, inline on sm+ -->
+            <div
+                class="flex flex-col sm:flex-row sm:items-center sm:ml-auto sm:space-x-4 space-y-2 sm:space-y-0 w-full sm:w-auto"
+            >
+                <button
+                    v-if="canCompare && !isFullscreen"
+                    @click="openFullscreen"
+                    class="bg-black text-white px-6 py-2 shadow transition cursor-pointer whitespace-nowrap w-full sm:w-auto"
+                    aria-label="Compare selected bikes"
+                >
+                    Σύγκριση ({{ bikes.length }})
+                </button>
+
+                <button
+                    v-if="bikes.length > 1 && canCompare && !isFullscreen"
+                    @click="removeAllAndClose"
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 cursor-pointer shadow transition whitespace-nowrap w-full sm:w-auto"
+                    aria-label="Remove all bikes and close compare bar"
+                >
+                    Αφαίρεση όλων
+                </button>
+            </div>
+        </div>
     </div>
 </template>

@@ -115,13 +115,14 @@ defineOptions({
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         <div v-for="bike in bikes" :key="bike.id">
                             <div class="overflow-hidden rounded-lg bg-white shadow-lg relative group">
-                                <!-- Compare Button -->
+                                <!-- Compare Button (shown on hover) -->
                                 <button
                                     @click="compareBike(bike)"
                                     class="absolute right-2 top-1/2 -translate-y-1/2
-                                           opacity-0 group-hover:opacity-100
-                                           md:opacity-0 md:group-hover:opacity-100
-                                           bg-white text-gray-700 hover:bg-gray-100 p-2 rounded-full shadow-lg z-10 cursor-pointer"
+                                       opacity-0 group-hover:opacity-100
+                                       md:opacity-0 md:group-hover:opacity-100
+                                       opacity-100 md:opacity-0
+                                       bg-white text-gray-700 hover:bg-gray-100 p-2 rounded-full shadow-lg z-10 cursor-pointer"
                                     title="Σύγκριση μοντέλου"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
