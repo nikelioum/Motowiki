@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Vendor;
 use App\Models\MotoBrand as Brand;
+use App\Models\Faq;
 
 class PagesController extends Controller
 {
@@ -17,9 +18,12 @@ class PagesController extends Controller
 
         $popularBrands = Brand::orderBy('sort_order', 'desc')->where('status', true)->where('is_popular', true)->take(6)->get();
         $newBikes = Bike::orderBy('created_at', 'desc')->where('status', true)->take(8)->get();
+        $faqs = Faq::orderBy('sort_order', 'asc')->get();
+
         return Inertia::render('Homepage', [
             'brands' => $popularBrands,
             'newBikes' => $newBikes,
+            'faqs' => $faqs,
         ]);
     }
 

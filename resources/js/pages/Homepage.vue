@@ -8,6 +8,7 @@ import Faq from '@/components/homepage/Faq.vue'
 defineProps({
     brands: Array,
     newBikes: Array,
+    faqs: Array,
 })
 
 defineOptions({
@@ -19,5 +20,5 @@ defineOptions({
     <Intro />
     <TopBrands :brands="brands" />
     <NewBikes :newBikes="newBikes"/>
-    <Faq />
+    <Faq :faqs="faqs"/>
 </template>
