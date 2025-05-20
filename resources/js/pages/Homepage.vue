@@ -9,6 +9,7 @@ defineProps({
     brands: Array,
     newBikes: Array,
     faqs: Array,
+    slider: Array,
 })
 
 defineOptions({
@@ -17,7 +18,7 @@ defineOptions({
 </script>
 
 <template>
-    <Intro />
+    <Intro :slider="slider"/>
     <TopBrands :brands="brands" />
     <NewBikes :newBikes="newBikes"/>
     <Faq :faqs="faqs"/>
