@@ -36,7 +36,7 @@ class MotoBrandController extends Controller
 
         $brandId = $brand->id;
 
-        $bikes = Bike::where('brand_id', $brandId)->with('category', 'brand')->get();
+        $bikes = Bike::where('brand_id', $brandId)->with('category', 'brand', 'specValues.spec.specCategory')->get();
 
         return Inertia::render('BrandBikes', [
             'bikes' => $bikes,

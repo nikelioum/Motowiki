@@ -38,7 +38,7 @@ const props = defineProps({
         <div class="flex justify-center mt-8">
             <Link href="/brands" class="inline-flex items-center px-6 py-2 border border-black text-black font-semibold text-center hover:bg-black hover:text-white transition-colors">
                 <!-- Button Text -->
-                See All Brands
+                Όλες οι μάρκες
                 <!-- Heroicon -->
                 <ArrowRightIcon class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
             </Link>

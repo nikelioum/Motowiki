@@ -35,7 +35,7 @@ class MotoCategoryController extends Controller
 
         $categoryId = $category->id;
 
-        $bikes = Bike::with('brand', 'category')
+        $bikes = Bike::with('brand', 'category', 'specValues.spec.specCategory')
             ->where('category_id', $categoryId)
             ->get();
 

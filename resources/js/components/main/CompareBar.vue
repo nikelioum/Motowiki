@@ -132,7 +132,7 @@ watch(
                     Brand: {{ bike.brand?.name || 'Άγνωστη Μάρκα' }}
                 </div>
                 <div class="text-sm text-gray-600 mt-1">
-                    Category: {{ bike.category?.title || 'Άγνωστη Κατηγορία' }}
+                    Category: {{ bike.category?.name || 'Άγνωστη Κατηγορία' }}
                 </div>
                 <div class="text-sm font-bold text-black">
                     Από {{ bike.price ? Math.floor(bike.price) + ' €' : '-' }}
@@ -141,15 +141,27 @@ watch(
                     Έτος: {{ bike.year }}
                 </div>
 
+                <!-- Render ALL specs in spec_values, no filtering -->
+                <div v-if="bike.spec_values && bike.spec_values.length" class="mt-2 w-full text-left px-2">
+                    <div
+                        v-for="specVal in bike.spec_values"
+                        :key="specVal.id"
+                        class="text-sm text-gray-700 mt-1"
+                    >
+                        <strong>{{ specVal.spec.label }}:</strong> {{ specVal.value }}
+                    </div>
+                </div>
+
                 <button
                     @click="removeBike(bike.id)"
-                    class="text-red-500 hover:text-red-700 mt-2 cursor-pointer"
+                    class="text-red-500 hover:text-red-700 mt-4 cursor-pointer"
                     aria-label="Remove bike"
                 >
                     &times;
                 </button>
             </div>
         </div>
+
 
         <!-- Non-fullscreen: mobile bikes grid + buttons stacked -->
         <div v-else class="flex flex-col sm:flex-row sm:items-center w-full gap-4 px-2">
