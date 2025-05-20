@@ -10,6 +10,7 @@ use App\Models\MotoBrand as Brand;
 use App\Models\Faq;
 use App\Models\Slider;
 use App\Models\Slide;
+use App\Models\Banner;
 
 class PagesController extends Controller
 {
@@ -22,12 +23,14 @@ class PagesController extends Controller
         $newBikes = Bike::orderBy('created_at', 'desc')->where('status', true)->take(8)->get();
         $faqs = Faq::orderBy('sort_order', 'asc')->get();
         $slider = Slider::where('id', 1)->with('slides')->get();
+        $banner = Banner::where('position', 'homepage')->get();
 
         return Inertia::render('Homepage', [
             'brands' => $popularBrands,
             'newBikes' => $newBikes,
             'faqs' => $faqs,
             'slider' => $slider,
+            'banner' => $banner,
         ]);
     }
 
