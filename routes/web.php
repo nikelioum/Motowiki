@@ -73,6 +73,19 @@ Route::get('/search/recommendations', [SearchController::class, 'recommendations
 //Search bikes
 Route::get('/bikes/search', [SearchController::class, 'searchBikes']);
 
+//Disable Login and Register
+Route::match(['get', 'post'], '/login', function () {
+    return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+});
+
+Route::match(['get', 'post'], '/register', function () {
+    return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+});
+
+Route::match(['get', 'post'], '/dashboard', function () {
+    return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
+});
+
 
 //Test api
 use Illuminate\Support\Facades\Http;
@@ -89,9 +102,9 @@ Route::get('/test-motorcycles', function () {
 
 
 //Admin dashboard for user
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('dashboard', function () {
+//    return Inertia::render('Dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

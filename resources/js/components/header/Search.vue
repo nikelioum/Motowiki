@@ -107,7 +107,7 @@ const goTo = (url: string) => {
             type="search"
             v-model="searchQuery"
             placeholder="Αναζήτηση..."
-            class="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-black"
+            class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-black"
             @focus="openModal"
         />
 

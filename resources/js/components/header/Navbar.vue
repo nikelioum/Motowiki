@@ -72,49 +72,49 @@ onUnmounted(() => {
             <div class="hidden md:flex items-center space-x-2 z-10">
                 <Search />
 
-                <!-- Account Dropdown -->
-                <div class="relative" @mouseenter="openDropdown" @mouseleave="closeDropdown">
-                    <button
-                        id="account-button"
-                        class="flex items-center space-x-1 py-2 cursor-pointer"
-                        type="button"
-                    >
-                        <span>Ο Λογαριασμός μου</span>
-                        <svg
-                            :class="{'transform rotate-180': accountDropdownOpen, 'transform rotate-0': !accountDropdownOpen}"
-                            class="w-4 h-4 transition-transform duration-200"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
-                    </button>
+<!--                &lt;!&ndash; Account Dropdown &ndash;&gt;-->
+<!--                <div class="relative" @mouseenter="openDropdown" @mouseleave="closeDropdown">-->
+<!--                    <button-->
+<!--                        id="account-button"-->
+<!--                        class="flex items-center space-x-1 py-2 cursor-pointer"-->
+<!--                        type="button"-->
+<!--                    >-->
+<!--                        <span>Ο Λογαριασμός μου</span>-->
+<!--                        <svg-->
+<!--                            :class="{'transform rotate-180': accountDropdownOpen, 'transform rotate-0': !accountDropdownOpen}"-->
+<!--                            class="w-4 h-4 transition-transform duration-200"-->
+<!--                            fill="none"-->
+<!--                            stroke="currentColor"-->
+<!--                            stroke-width="2"-->
+<!--                            viewBox="0 0 24 24"-->
+<!--                            stroke-linecap="round"-->
+<!--                            stroke-linejoin="round"-->
+<!--                        >-->
+<!--                            <path d="M6 9l6 6 6-6" />-->
+<!--                        </svg>-->
+<!--                    </button>-->
 
-                    <div
-                        id="account-dropdown"
-                        v-show="accountDropdownOpen"
-                        class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
-                    >
-                        <Link
-                            href="/login"
-                            class="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition"
-                            @click="accountDropdownOpen = false"
-                        >
-                            Σύνδεση
-                        </Link>
-                        <Link
-                            href="/register"
-                            class="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition"
-                            @click="accountDropdownOpen = false"
-                        >
-                            Εγγραφή
-                        </Link>
-                    </div>
-                </div>
+<!--                    <div-->
+<!--                        id="account-dropdown"-->
+<!--                        v-show="accountDropdownOpen"-->
+<!--                        class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"-->
+<!--                    >-->
+<!--                        <Link-->
+<!--                            href="/login"-->
+<!--                            class="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition"-->
+<!--                            @click="accountDropdownOpen = false"-->
+<!--                        >-->
+<!--                            Σύνδεση-->
+<!--                        </Link>-->
+<!--                        <Link-->
+<!--                            href="/register"-->
+<!--                            class="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition"-->
+<!--                            @click="accountDropdownOpen = false"-->
+<!--                        >-->
+<!--                            Εγγραφή-->
+<!--                        </Link>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
             <!-- Mobile Hamburger -->
@@ -167,22 +167,22 @@ onUnmounted(() => {
             </div>
 
             <!-- Auth Links -->
-            <div class="pt-4 space-y-2">
-                <Link
-                    href="/login"
-                    class="block text-center px-4 py-2 border border-black text-black hover:bg-black hover:text-white transition"
-                    @click="isOpen = false"
-                >
-                    Σύνδεση
-                </Link>
-                <Link
-                    href="/register"
-                    class="block text-center px-4 py-2 bg-black text-white hover:opacity-90 transition"
-                    @click="isOpen = false"
-                >
-                    Εγγραφή
-                </Link>
-            </div>
+<!--            <div class="pt-4 space-y-2">-->
+<!--                <Link-->
+<!--                    href="/login"-->
+<!--                    class="block text-center px-4 py-2 border border-black text-black hover:bg-black hover:text-white transition"-->
+<!--                    @click="isOpen = false"-->
+<!--                >-->
+<!--                    Σύνδεση-->
+<!--                </Link>-->
+<!--                <Link-->
+<!--                    href="/register"-->
+<!--                    class="block text-center px-4 py-2 bg-black text-white hover:opacity-90 transition"-->
+<!--                    @click="isOpen = false"-->
+<!--                >-->
+<!--                    Εγγραφή-->
+<!--                </Link>-->
+<!--            </div>-->
         </div>
     </header>
 </template>

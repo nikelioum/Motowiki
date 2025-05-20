@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper/modules' // New Swiper module import
+
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const props = defineProps({
     slider: Array,
     banner: Array,
 })
+
+const modules = [Pagination]
 </script>
 
 <template>
@@ -16,7 +19,13 @@ const props = defineProps({
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Left: Swiper Slider -->
             <div class="relative w-full h-[300px] md:h-full overflow-hidden shadow-lg group">
-                <Swiper :slides-per-view="1" :loop="true" class="h-full w-full">
+                <Swiper
+                    :slides-per-view="1"
+                    :loop="true"
+                    :pagination="{ dynamicBullets: true, clickable: true }"
+                    :modules="modules"
+                    class="h-full w-full"
+                >
                     <SwiperSlide v-for="slide in slider[0].slides" :key="slide.id">
                         <Link :href="slide.button_link || '#'" class="block h-full w-full">
                             <div
@@ -44,7 +53,7 @@ const props = defineProps({
             <!-- Right banners (dynamic, max 2 banners) -->
             <div class="flex flex-col gap-6">
                 <div
-                    v-for="(b, index) in banner.slice(0,2)"
+                    v-for="(b, index) in banner.slice(0, 2)"
                     :key="b.id || index"
                     class="relative h-80 overflow-hidden group shadow-lg"
                     :style="`background-image: url('/storage/${b.image}'); background-size: cover; background-position: center;`"
@@ -67,3 +76,28 @@ const props = defineProps({
         </div>
     </div>
 </template>
+
+
+<style scoped>
+/* Base bullet style */
+::v-deep(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Active bullet */
+::v-deep(.swiper-pagination-bullet-active) {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+}
+
+/* Optional: spacing or other tweaks */
+::v-deep(.swiper-pagination) {
+    bottom: 10px !important; /* adjust position if needed */
+    text-align: center;
+}
+</style>
+
