@@ -78,7 +78,7 @@ class BikeResource extends Resource
                             ->options(\App\Models\Spec::pluck('label', 'id')->toArray())
                             ->required(),
                         Forms\Components\TextInput::make('value')
-                            ->required(),
+                        ,
                     ])
                     ->defaultItems(0)
                     ->createItemButtonLabel('Add Specification')

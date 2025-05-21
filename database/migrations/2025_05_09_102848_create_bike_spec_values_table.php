@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('bike_id')->constrained()->onDelete('cascade');
             $table->foreignId('spec_id')->constrained()->onDelete('cascade');
-            $table->string('value'); // or text() if the value might be long
+            $table->string('value');
             $table->timestamps();
         });
     }
