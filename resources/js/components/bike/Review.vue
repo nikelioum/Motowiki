@@ -85,14 +85,14 @@ const loadMore = () => {
 </script>
 
 <template>
-    <div class="py-20 max-w-[600px] space-y-6">
+    <div class="py-20 max-w-[1200px] space-y-6">
         <!-- Reviews List -->
         <div>
             <h3 class="text-xl font-semibold mb-4">Αξιολογήσεις</h3>
             <div v-if="loading" class="italic text-gray-600">Φόρτωση αξιολογήσεων...</div>
             <div v-else-if="error" class="text-red-500">{{ error }}</div>
             <div v-else-if="allReviews.length === 0" class="italic text-gray-600">Δεν υπάρχουν ακόμα κριτικές.</div>
-            <div v-else class="space-y-4">
+            <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div
                     v-for="review in visibleReviews"
                     :key="review.id"
