@@ -90,4 +90,9 @@ class Bike extends Model
     {
         return $this->hasMany(\App\Models\BikeSpecValue::class, 'bike_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

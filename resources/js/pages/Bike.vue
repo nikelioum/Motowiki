@@ -2,6 +2,7 @@
 import MainLayout from '@/layouts/Main.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { defineProps, ref, computed } from 'vue';
+import Review from '@/components/bike/Review.vue';
 
 const props = defineProps({
     bike: Object,
@@ -116,6 +117,8 @@ const selectedTab = ref(Object.keys(groupedSpecs.value)[0] || '');
                 </div>
             </div>
         </div>
+
+        <Review :bike-id="bike.id" />
     </div>
 </template>
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ReviewController;
 
 
 //homepage
@@ -85,6 +86,12 @@ Route::match(['get', 'post'], '/register', function () {
 Route::match(['get', 'post'], '/dashboard', function () {
     return Inertia::render('Notfound')->toResponse(request())->setStatusCode(404);
 });
+
+//Review show
+Route::get('/bikes/{id}/reviews', [ReviewController::class, 'index'])->name('bikes.reviews.index');
+
+//Review post
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 
 //Test api
