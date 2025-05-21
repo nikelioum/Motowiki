@@ -85,7 +85,7 @@ const loadMore = () => {
 </script>
 
 <template>
-    <div class="py-20 max-w-[1200px] space-y-6">
+    <div class="py-20 max-w-[1200px] space-y-6" id="reviews-section">
         <!-- Reviews List -->
         <div>
             <h3 class="text-xl font-semibold mb-4">Αξιολογήσεις</h3>

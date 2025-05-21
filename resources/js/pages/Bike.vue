@@ -3,6 +3,7 @@ import MainLayout from '@/layouts/Main.vue';
 import { Link, Head } from '@inertiajs/vue3';
 import { defineProps, ref, computed } from 'vue';
 import Review from '@/components/bike/Review.vue';
+import Navigation from '@/components/bike/Navigation.vue';
 
 const props = defineProps({
     bike: Object,
@@ -47,6 +48,7 @@ const selectedTab = ref(Object.keys(groupedSpecs.value)[0] || '');
     </Head>
 
     <div class="py-20">
+        <Navigation />
         <!-- Breadcrumb -->
         <nav class="text-sm text-gray-600 mb-6" aria-label="Breadcrumb">
             <ol class="list-reset flex items-center">
@@ -85,7 +87,7 @@ const selectedTab = ref(Object.keys(groupedSpecs.value)[0] || '');
         </div>
 
         <!-- Specs Section Below -->
-        <div class="mt-16">
+        <div class="pt-16" id="specs-section">
             <h3 class="text-2xl font-bold mb-4">Χαρακτηριστικά</h3>
 
             <!-- Tabs -->
