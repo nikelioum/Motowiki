@@ -27,7 +27,7 @@ class ReviewController extends Controller
         // ]);
     }
 
-    
+
     //Post Review
     public function store(Request $request)
     {
