@@ -132,7 +132,7 @@ const loadMore = () => {
         </button>
 
         <!-- Review Form -->
-        <form v-if="showForm" @submit.prevent="submit" class="bg-white p-6 shadow rounded space-y-4">
+        <form v-if="showForm" @submit.prevent="submit" class="bg-gray-100 p-6 shadow rounded space-y-4">
             <div>
                 <label class="block mb-1 font-semibold"></label>
                 <div class="flex space-x-1">

@@ -114,6 +114,31 @@ class PagesController extends Controller
     }
 
 
+    // Moto Quiz page
+    public function motoQuiz()
+    {
+
+        return Inertia::render('MotoQuiz', [
+            'breadcrumb' => [
+                ['label' => 'Αρχική', 'url' => '/'],
+                ['label' => 'MotoQuiz', 'url' => '/moto-quiz'],
+            ],
+        ]);
+    }
+
+    //Moto Quiz Results
+    public function motoQUizResults(Request $request){
+
+        $answers = $request->input('answers');
+
+        $bikes = Bike::with('category', 'brand')->where('status', true)->orderBy('id', 'desc')->take(4)->get();
+
+        return response()->json([
+            'bikes' => $bikes,
+        ]);
+    }
+
+
     // Terms page
     public function terms()
     {

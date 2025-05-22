@@ -65,6 +65,7 @@ onUnmounted(() => {
                 <Link href="/categories" class="text-gray-900 text-lg hover:text-black">Κατηγορίες</Link>
                 <Link href="/brands" class="text-gray-900 text-lg hover:text-black">Εταιρείες</Link>
                 <Link href="/vendors" class="text-gray-900 text-lg hover:text-black">Αντιπροσωπίες</Link>
+                <Link href="/moto-quiz" class="block text-gray-900 text-lg hover:text-black">Βρες τη Μοτοσυκλέτα σου</Link>
                 <Link href="/about" class="text-gray-900 text-lg hover:text-black">Σχετικά</Link>
             </nav>
 
@@ -152,6 +153,7 @@ onUnmounted(() => {
             <Link href="/categories" class="block text-gray-900 text-lg hover:text-black">Κατηγορίες</Link>
             <Link href="/brands" class="block text-gray-900 text-lg hover:text-black">Εταιρείες</Link>
             <Link href="/vendors" class="block text-gray-900 text-lg hover:text-black">Αντιπροσωπίες</Link>
+            <Link href="/moto-quiz" class="block text-gray-900 text-lg hover:text-black">Βρες τη Μοτοσυκλέτα σου</Link>
             <Link href="/about" class="block text-gray-900 text-lg hover:text-black">Σχετικά</Link>
 
             <!-- Mobile Search -->

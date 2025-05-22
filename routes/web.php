@@ -39,6 +39,12 @@ Route::get('/vendors', [PagesController::class, 'vendors'])->name('vendors');
 //About page
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 
+//Moto Quiz page
+Route::get('/moto-quiz', [PagesController::class, 'motoQUiz'])->name('moto_quiz');
+
+//Moto Quiz results
+Route::get('/moto-quiz-results', [PagesController::class, 'motoQUizResults'])->name('moto_quiz_results');
+
 //Contact page
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
