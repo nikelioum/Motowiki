@@ -8,6 +8,8 @@ use Inertia\Inertia;
 
 class FeedbackController extends Controller
 {
+
+    //Store Feeback Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -21,6 +23,6 @@ class FeedbackController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        return redirect()->back()->with('success', 'Ευχαριστούμε για το feedback!');
+        return redirect()->back()->with('success', 'Ευχαριστούμε για το feedback.');
     }
 }
