@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Feedback;
 use Inertia\Inertia;
-use DB;
 
 class FeedbackController extends Controller
 {
@@ -29,21 +28,6 @@ class FeedbackController extends Controller
     
 
 
-    public function lala(){
-
-        // Get all reviews
-    $reviews = DB::table('reviews')->get();
-
-    // Count them
-    $count = $reviews->count();
-
-    return [
-        'total' => $count,
-        'reviews' => $reviews,
-    ];
-
-
-    }
    
 
 }
