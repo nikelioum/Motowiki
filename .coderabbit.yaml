@@ -1,0 +1,5 @@
+reviews:
+  enabled: true
+  default_branches:
+    - master
+  review_status: true
