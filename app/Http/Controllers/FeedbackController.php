@@ -9,7 +9,14 @@ use Inertia\Inertia;
 class FeedbackController extends Controller
 {
 
-    //Store Feeback Controller
+    /**
+     * Handles the submission and storage of user feedback.
+     *
+     * Validates the incoming request for a required mood and optional feedback message, then creates a new feedback record with the user's IP address. Redirects back with a success message upon completion.
+     *
+     * @param Request $request The HTTP request containing feedback data.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
