@@ -81,7 +81,7 @@ class Bike extends Model
 
             DB::table('bike_spec_values')->insert($specsToInsert);
         });
-        
+
     }
 
     public function brand()

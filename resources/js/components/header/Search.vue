@@ -142,7 +142,7 @@ const goTo = (url: string) => {
 
                     <!-- Live Search Results -->
                     <!-- Search Results Grid -->
-                    <div v-if="searchResults.length > 0" class="grid grid-cols-3 md:grid-cols-3 gap-6 mt-6">
+                    <div v-if="searchResults.length > 0" class="max-h-72 overflow-y-auto grid grid-cols-3 md:grid-cols-3 gap-6 mt-6">
                         <div
                             v-for="bike in searchResults"
                             :key="bike.id"
