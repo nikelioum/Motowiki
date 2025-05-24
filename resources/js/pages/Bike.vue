@@ -71,6 +71,14 @@ const selectedTab = ref(Object.keys(groupedSpecs.value)[0] || '');
                 <h2 class="text-3xl font-bold text-gray-900">{{ bike.name }}</h2>
                 <div class="py-5 text-xl font-bold text-gray-900">Από {{ Math.floor(bike.price) }}€</div>
                 <p class="text-gray-700 text-base">{{ bike.description }}</p>
+                <div class="py-10">
+                    <a :href="bike.external_url"
+                       class="inline-block border border-black text-black px-4 py-2 rounded hover:bg-black hover:text-white transition"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Μετάβαση στον αντιπρόσωπο
+                    </a>
+                </div>
 
                 <ul class="text-gray-700 text-lg space-y-3 py-10">
                     <li><strong>Έτος:</strong> {{ bike.year }}</li>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class Bike extends Model
 {
@@ -24,10 +25,17 @@ class Bike extends Model
         'meta_description',
         'meta_image',
         'status',
+        'external_url'
     ];
 
     protected static function booted()
     {
+        static::deleting(function ($bike) {
+            if ($bike->image) {
+                Storage::disk('public')->delete($bike->image);
+            }
+        });
+
         static::created(function (Bike $bike) {
             $defaultSpecs = [
                 20 => 'τετραβάλβιδος, Τετράχρονος, Υγρόψυκτος, 2EEK',

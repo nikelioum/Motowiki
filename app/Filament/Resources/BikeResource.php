@@ -57,6 +57,10 @@ class BikeResource extends Resource
                     ->image(),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make('external_url')
+                    ->maxLength(255)
+                    ->default(null)
+                    ->url(),
                 Forms\Components\TextInput::make('meta_title')
                     ->maxLength(255)
                     ->default(null),
