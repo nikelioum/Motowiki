@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
 import Navbar from '@/components/header/Navbar.vue'
 import Footer from '@/components/footer/Footer.vue'
 import Newsletter from '@/components/main/Newsletter.vue'
 import Consent from '@/components/main/Consents.vue'
 import ReviewPrompt from '@/components/main/ReviewPrompt.vue'
 import GoTop from '@/components/main/GoTop.vue'
+import SocialShare from '@/components/main/SocialShare.vue';
 
 const cookieAccepted = ref(false)
 
@@ -49,4 +49,5 @@ const rejectCookies = () => {
     <!--Footer-->
     <Footer />
     <GoTop />
+    <SocialShare />
 </template>
